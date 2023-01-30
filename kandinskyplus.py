@@ -16,6 +16,17 @@ def fill_circle(xc, yc, radius, color):
                 set_pixel(x, y, color)
 
 
-circol = color(0, 0, 0)
-
-fill_circle(160, 120, 50, circol)
+def fill_line(x1, y1, x2, y2, color):
+    dx = x2-x1
+    dy = y2-y1
+    if dx == 0:
+        fill_rect(x1, y1, 1, dy, color)
+    else:
+        a = dy/dx
+        b = -a*x1 + y1
+        if abs(dx) < abs(dy):
+            for x in range(int(x1*a), int(x2*a)):
+                set_pixel(int(x/a), int(x + b), color)
+        else:
+            for x in range(x1, x2):
+                set_pixel(x, int(a*x + b), color)
